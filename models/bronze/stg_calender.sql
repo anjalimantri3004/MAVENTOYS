@@ -1,1 +1,1 @@
-select * from maventoys.PUBLIC.stages.calendar
+SELECT * FROM MAVENTOYS.PUBLIC.CALENDAR 

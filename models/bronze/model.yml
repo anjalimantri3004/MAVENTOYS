@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: public
+    database: maventoys
+    schema: public
+    tables:
+      - name: sales
+      - name: inventory
+      - name: products
+      - name: calendar
+      - name: stores
+      - name: dictionary
