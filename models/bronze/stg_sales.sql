@@ -1,4 +1,5 @@
 --SELECT * FROM MAVENTOYS.PUBLIC.SALES
+{{ config(materialized='table') }}
 SELECT
   CAST('Sale_ID' AS INTEGER) AS sale_id,
   TO_DATE('Date', 'YYYY-MM-DD') AS sale_date,
