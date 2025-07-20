@@ -1,19 +1,26 @@
 {{ config(
-    materialized='table',
-    schema='public'
+    materialized = 'table',
+    schema = 'public'
 ) }}
 
-with source_data as (
+with source as (
+
+    select * from {{ ref('stg_stores') }}
+
+),
+
+renamed as (
 
     select
-        cast('Store_ID'  as varchar) as store_id,
-        cast('Store_Name' as varchar) as store_name,
-        cast('City' as varchar) as city,
-        cast('State' as varchar) as state,
-        cast('Region' as varchar) as region
+        cast("Store_ID" as varchar) as store_id,
+        initcap(trim("Store_Name")) as store_name,
+        upper(trim("Location")) as location,
+        cast(nullif("Capacity", '') as integer) as capacity,
+        current_timestamp() as updated_at
 
-    from {{ ref('stg_stores') }}
+    from source
+    where "Store_ID" is not null and "Store_Name" is not null
 
 )
 
-select * from source_data
+select * from renamed
