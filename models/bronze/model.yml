@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: staging
-    database: maventoys
-    schema: public
+  - name: public
+    database: MAVENTOYS
+    schema: PUBLIC
     tables:
       - name: sales
       - name: inventory

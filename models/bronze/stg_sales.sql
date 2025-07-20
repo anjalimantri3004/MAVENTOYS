@@ -13,7 +13,7 @@ with source_data as (
         try_cast("UNITS" as integer) as units,
         current_timestamp() as ingestion_timestamp
 
-    from {{ source('public', 'sales') }}
+    from {{ source('public','sales') }}
 
 )
 
