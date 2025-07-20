@@ -6,7 +6,7 @@ with source as (
 
 cleaned as (
     select
-        try_cast("date" as date) as calendar_date,
+        try_cast("calendar_date" as date) as calendar_date,
         try_cast("day" as integer) as day,
         try_cast("month" as integer) as month,
         try_cast("year" as integer) as year,
