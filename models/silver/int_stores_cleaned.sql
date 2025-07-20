@@ -12,14 +12,14 @@ with source as (
 renamed as (
 
     select
-        cast('STORE_ID' as varchar) as store_id,
-        initcap(trim('STORE_NAME')) as store_name,
-        upper(trim('LOCATION')) as location,
-        cast(nullif('CAPACITY', '') as integer) as capacity,
+        cast(store_id as varchar) as store_id,
+        initcap(trim(store_name)) as store_name,
+        upper(trim(location)) as location,
+        try_cast(capacity as integer) as capacity,
         current_timestamp() as updated_at
 
     from source
-    where 'store_id' is not null and 'store_name' is not null
+    where store_id is not null and store_name is not null
 
 )
 
