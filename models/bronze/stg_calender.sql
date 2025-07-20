@@ -12,6 +12,7 @@ with source_data as (
         date_part('year', try_cast("DATE" as date)) as year,
         date_part('dow', try_cast("DATE" as date)) as day_of_week,  -- 0=Sunday in Snowflake
         --to_char(try_cast("Date" as date), 'Day') as day_name
+        --current_timestamp() as ingestion_timestamp
 
     from {{ source('public', 'calendar') }}
 

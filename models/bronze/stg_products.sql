@@ -13,6 +13,7 @@ with source_data as (
         -- Remove '$' and cast to numeric (Silver layer can handle invalid formats)
         try_cast(replace("PRODUCT_COST", '$', '') as float) as product_cost,
         try_cast(replace("PRODUCT_PRICE", '$', '') as float) as product_price,
+        current_timestamp() as ingestion_timestamp
 
     from {{ source('public', 'products') }}
 
