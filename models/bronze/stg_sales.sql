@@ -19,7 +19,7 @@ with source_data as (
         -- Add ingestion timestamp
         current_timestamp() as ingestion_timestamp
 
-    from {{ source('public', 'staging_sales') }}
+    from {{ source('public', 'sales') }}
 
 )
 
