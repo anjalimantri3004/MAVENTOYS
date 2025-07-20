@@ -19,8 +19,8 @@ with source_data as (
         -- Add ingestion timestamp
         current_timestamp() as ingestion_timestamp
 
-    from {{ source('public', 'sales') }}
+    from {{ source('PUBLIC','SALES') }}
 
 )
 
-select * from MAVENTOYS.PUBLIC.SALES
+select * from SALES
