@@ -12,8 +12,8 @@ with sales_data as (
         s.units,
         p.product_price,
         p.product_cost,
-        (s.units * p.product_price) as sales_amount,
-        (s.units * p.product_cost) as cost_amount
+        (s.units * p.price) as sales_amount,
+        (s.units * p.cost) as cost_amount
     from {{ ref('int_sales_cleaned') }} s
     left join {{ ref('int_products_cleaned') }} p
         on s.product_id = p.product_id
