@@ -1,15 +1,26 @@
 --SELECT * FROM MAVENTOYS.PUBLIC.SALES
-{{ config(materialized='table') }}
-SELECT
-  CAST('Sale_ID' AS INTEGER) AS sale_id,
-  TO_DATE('Date', 'YYYY-MM-DD') AS sale_date,
-  CAST('Store_ID' AS INTEGER) AS store_id,
-  CAST('Product_ID' AS INTEGER) AS product_id,
-  CAST('Units' AS INTEGER) AS units
-FROM {{ ref('sales') }}
-WHERE
-  'Sale_ID' IS NOT NULL
-  AND 'Date' IS NOT NULL
-  AND 'Store_ID' IS NOT NULL
-  AND 'Product_ID' IS NOT NULL
-  AND 'Units' > 0
+{{ config(
+    materialized='table',
+    schema='public'
+) }}
+
+with source_data as (
+
+    select
+        -- Raw columns with light cleanup
+        cast(order_id as varchar) as order_id,
+        cast(customer_id as varchar) as customer_id,
+        try_cast(order_date as date) as order_date,
+        cast(product_id as varchar) as product_id,
+        try_cast(quantity as integer) as quantity,
+        try_cast(price as float) as price,
+        try_cast(total_amount as float) as total_amount,
+
+        -- Add ingestion timestamp
+        current_timestamp() as ingestion_timestamp
+
+    from {{ source('public', 'staging__sales') }}
+
+)
+
+select * from source_data
