@@ -6,7 +6,7 @@
 with source_data as (
 
     select
-        try_cast("Date" as date) as calendar_date,
+        try_cast("DATE" as date) as calendar_date,
         cast("Day" as varchar) as day_name,
         cast("Month" as varchar) as month_name,
         try_cast("Month_Num" as integer) as month_number,
