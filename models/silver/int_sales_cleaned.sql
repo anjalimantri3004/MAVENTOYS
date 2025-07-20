@@ -12,7 +12,7 @@ with cleaned as (
         product_id,
         units,
         ingestion_timestamp
-    from {{ ref('stg_sales') }}
+    from {{ ref("stg_sales") }}
     where sale_id is not null
       and store_id is not null
       and product_id is not null
