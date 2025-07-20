@@ -25,7 +25,7 @@ cleaned_inventory as (
         product_id,
         store_id,
         stock_on_hand,
-        ingestion_timestamp,
+        last_updated,
         case
             when stock_on_hand = 0 then 'Out of Stock'
             else 'In Stock'
