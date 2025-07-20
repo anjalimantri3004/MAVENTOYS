@@ -1,24 +1,18 @@
 {{ config(materialized='table', schema='public') }}
 
 with source as (
-    select * from {{ ref('stg_inventory') }}
+    select * from {{ ref('stg_inventory') }}  -- assuming your bronze model is named 'stg_inventory'
 ),
 
 cleaned as (
     select
-        inventory_id,
-        product_id,
-        store_id,
-        coalesce(stock_level, 0) as stock_level,
-        coalesce(reorder_level, 0) as reorder_level,
-        last_updated,
-        case
-            when stock_level <= reorder_level then 'LOW STOCK'
-            else 'IN STOCK'
-        end as inventory_status,
-        current_timestamp() as updated_at
+        cast(product_id as varchar) as product_id,
+        cast(store_id as varchar) as store_id,
+        try_cast(stock_on_hand as integer) as stock_on_hand,
+        current_timestamp() as last_updated
     from source
-    where inventory_id is not null and product_id is not null and store_id is not null
+    where product_id is not null
+      and store_id is not null
 )
 
 select * from cleaned
