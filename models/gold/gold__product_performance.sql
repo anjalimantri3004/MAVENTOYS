@@ -45,7 +45,6 @@ select
     a.product_id,
     pi.product_name,
     pi.category,
-    pi.brand,
     a.total_units_sold,
     a.total_sales_revenue,
     a.total_cost,
