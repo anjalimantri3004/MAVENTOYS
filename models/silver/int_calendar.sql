@@ -1,4 +1,4 @@
-{ config(materialized='table', schema='public') }}
+{{ config(materialized='table', schema='public') }}
 
 with source as (
     select * from {{ ref('stg_calender') }}  -- assuming your bronze model is 'stg_calendar'
