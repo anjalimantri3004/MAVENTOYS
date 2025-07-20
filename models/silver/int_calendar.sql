@@ -4,7 +4,7 @@
 ) }}
 
 with bronze as (
-    select * from {{ ref('stg_calendar') }}  -- 'stg_calendar' is your bronze table name
+    select * from {{ ref('stg_calender') }}  -- 'stg_calendar' is your bronze table name
 ),
 
 cleaned as (
