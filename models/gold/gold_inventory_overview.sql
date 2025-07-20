@@ -12,7 +12,7 @@ with latest_inventory as (
         last_updated,
         row_number() over (
             partition by product_id, store_id
-            order by last_updated desc
+            order by product_id desc
         ) as row_num
 
     from {{ ref('int_inventory_status') }}
