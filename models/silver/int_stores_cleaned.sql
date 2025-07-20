@@ -14,7 +14,7 @@ renamed as (
     select
         cast(store_id as varchar) as store_id,
         initcap(trim(store_name)) as store_name,
-        upper(trim(location)) as location,
+        upper(trim(store_location)) as location,
         try_cast(capacity as integer) as capacity,
         current_timestamp() as updated_at
 
