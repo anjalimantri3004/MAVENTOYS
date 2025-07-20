@@ -1,4 +1,3 @@
---SELECT * FROM MAVENTOYS.PUBLIC.SALES
 {{ config(
     materialized='table',
     schema='public'
@@ -7,20 +6,15 @@
 with source_data as (
 
     select
-        -- Raw columns with light cleanup
-        cast(order_id as varchar) as order_id,
-        cast(customer_id as varchar) as customer_id,
-        try_cast(order_date as date) as order_date,
-        cast(product_id as varchar) as product_id,
-        try_cast(quantity as integer) as quantity,
-        try_cast(price as float) as price,
-        try_cast(total_amount as float) as total_amount,
-
-        -- Add ingestion timestamp
+        cast("SALE_ID" as varchar) as sale_id,
+        try_cast("DATE" as date) as sale_date,
+        cast("STORE_ID" as varchar) as store_id,
+        cast("PRODUCT_ID" as varchar) as product_id,
+        try_cast("UNITS" as integer) as units,
         current_timestamp() as ingestion_timestamp
 
-    from {{ source('PUBLIC','SALES') }}
+    from {{ source('public', 'sales') }}
 
 )
 
-select * from SALES
+select * from source_data
