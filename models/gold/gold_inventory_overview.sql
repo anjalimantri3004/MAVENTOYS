@@ -11,8 +11,8 @@ with latest_inventory as (
         stock_on_hand,
         last_updated,
         row_number() over (
-            partition by stock_on_hand, store_id
-            order by product_id desc
+            partition by product_id, store_id
+            order by stock_on_hand desc
         ) as row_num
 
     from {{ ref('int_inventory_status') }}
