@@ -19,7 +19,7 @@ renamed as (
         current_timestamp() as updated_at
 
     from source
-    where "Store_ID" is not null and "Store_Name" is not null
+    where "store_id" is not null and "store_name" is not null
 
 )
 
