@@ -1,7 +1,7 @@
 {{ config(materialized='table', schema='public') }}
 
 with source as (
-    select * from {{ ref('stg_calendar') }}  -- assuming your bronze model is named 'stg_calendar'
+    select * from {{ ref('stg_calender') }}  -- assuming your bronze model is named 'stg_calendar'
 ),
 
 cleaned as (
