@@ -40,16 +40,14 @@ store_info as (
     select
         store_id,
         store_name,
-        city,
-        region
+        location
     from {{ ref('int_stores_cleaned') }}
 )
 
 select
     a.store_id,
     si.store_name,
-    si.city,
-    si.region,
+    si.location,
     a.product_id,
     a.total_units_sold,
     a.total_sales_amount,
