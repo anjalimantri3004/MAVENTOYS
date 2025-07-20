@@ -1,43 +1,36 @@
 {{ config(
     materialized='table',
-    schema='public'
+    schema='gold'
 ) }}
 
 with sales as (
-    select *
-    from {{ ref('int_sales_cleaned') }}
+    select * from {{ ref('int_sales_cleaned') }}
 ),
-
 products as (
-    select *
-    from {{ ref('int_products_cleaned') }}
+    select * from {{ ref('int_products_cleaned') }}
 ),
-
 stores as (
-    select *
-    from {{ ref('int_stores_cleaned') }}
+    select * from {{ ref('int_stores_cleaned') }}
 ),
-
 calendar as (
-    select *
-    from {{ ref('int_calendar') }}
+    select * from {{ ref('int_calendar') }}
 )
 
 select
-    cal.calendar_date,
-    prod.product_id,
-    prod.product_name,
-    str.store_id,
-    str.store_name,
-    sum(sal.sales_amount) as total_sales_amount,
-    sum(sal.quantity_sold) as total_quantity_sold
-from sales sal
-join products prod on sal.product_id = prod.product_id
-join stores str on sal.store_id = str.store_id
-join calendar cal on sal.date = cal.calendar_date
-group by
-    cal.calendar_date,
-    prod.product_id,
-    prod.product_name,
-    str.store_id,
-    str.store_name
+    s.sale_id,
+    s.sale_date,
+    c.day,
+    c.month,
+    c.year,
+    s.product_id,
+    p.product_name,
+    p.category,
+    s.store_id,
+    st.store_name,
+    st.location,
+    s.units,
+    (s.units * p.price) as sales_amount
+from sales s
+left join calendar c on s.sale_date = c.calendar_date
+left join products p on s.product_id = p.product_id
+left join stores st on s.store_id = st.store_id
