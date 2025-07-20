@@ -12,7 +12,7 @@ with source_data as (
         try_cast('Month_Num' as integer) as month_number,
         try_cast('Year' as integer) as year,
         cast('Quarter' as varchar) as quarter,
-        cast('Holiday' as boolean) as is_holiday
+        --cast('Holiday' as boolean) as is_holiday
 
     from {{ ref('stg_calender') }}
 
