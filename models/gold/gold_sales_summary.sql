@@ -5,22 +5,22 @@
 
 with sales as (
     select *
-    from {{ ref('silver_sales_cleaned') }}
+    from {{ ref('int_sales_cleaned') }}
 ),
 
 products as (
     select *
-    from {{ ref('silver_products_cleaned') }}
+    from {{ ref('int_products_cleaned') }}
 ),
 
 stores as (
     select *
-    from {{ ref('silver_stores_cleaned') }}
+    from {{ ref('int_stores_cleaned') }}
 ),
 
 calendar as (
     select *
-    from {{ ref('silver_calendar') }}
+    from {{ ref('int_calendar') }}
 )
 
 select
