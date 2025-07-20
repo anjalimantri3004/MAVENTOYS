@@ -53,4 +53,4 @@ select
 from aggregated a
 left join product_info pi
     on a.product_id = pi.product_id
-order by a.total_sales_revenue desc
+order by a.profit_margin desc
