@@ -1,19 +1,19 @@
-{{ config(
-    materialized='table',
-    schema='public'
-) }}
+{{ config(materialized='table', schema='public') }}
 
-with source_data as (
+with source as (
+    select * from {{ ref('stg_products') }}
+),
 
+cleaned as (
     select
-        cast('Product_ID' as varchar) as product_id,
-        cast('Product_Name' as varchar) as product_name,
-        cast('Category' as varchar) as category,
-        try_cast('Price' as numeric(10,2)) as price,
-        cast('Brand' as varchar) as brand
-
-    from {{ ref('stg_products') }}
-
+        product_id,
+        initcap(product_name) as product_name,
+        upper(product_category) as category,
+        round(product_price, 2) as price,
+        round(product_cost, 2) as cost,
+        current_timestamp() as updated_at
+    from source
+    where product_id is not null and product_name is not null
 )
 
-select * from source_data
+select * from cleaned
