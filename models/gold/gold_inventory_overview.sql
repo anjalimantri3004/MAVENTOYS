@@ -9,10 +9,10 @@ with latest_inventory as (
         product_id,
         store_id,
         stock_on_hand,
-        ingestion_timestamp,
+        last_updated,
         row_number() over (
             partition by product_id, store_id
-            order by ingestion_timestamp desc
+            order by last_updated desc
         ) as row_num
 
     from {{ ref('int_inventory_status') }}
