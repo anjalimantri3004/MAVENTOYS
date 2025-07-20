@@ -3,22 +3,7 @@
     schema='public'
 ) }}
 
-with source_data as (
-
-    select
-        cast("Sale_ID" as varchar) as sale_id,
-        try_cast("Date" as date) as sale_date,
-        cast("Store_ID" as varchar) as store_id,
-        cast("Product_ID" as varchar) as product_id,
-        try_cast("Units" as integer) as units,
-        current_timestamp() as ingestion_timestamp
-
-    select
-    from {{ ref('stg_sales') }}  -- use the Bronze table ref here
-
-),
-
-cleaned_data as (
+with cleaned as (
 
     select
         sale_id,
@@ -27,12 +12,11 @@ cleaned_data as (
         product_id,
         units,
         ingestion_timestamp
-    from source_data
+    from {{ ref('stg_sales') }}
     where sale_id is not null
-        and store_id is not null
-        and product_id is not null
-        and sale_date is not null
-
+      and store_id is not null
+      and product_id is not null
+      and sale_date is not null
 )
 
-select * from cleaned_data
+select * from cleaned
