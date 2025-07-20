@@ -10,8 +10,8 @@ with sales_data as (
         s.product_id,
         s.sale_date,
         s.units,
-        p.product_price,
-        p.product_cost,
+        p.price,
+        p.cost,
         (s.units * p.price) as sales_amount,
         (s.units * p.cost) as cost_amount
     from {{ ref('int_sales_cleaned') }} s
