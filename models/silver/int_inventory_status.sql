@@ -1,7 +1,7 @@
 {{ config(materialized='table', schema='public') }}
 
 with source as (
-    select * from {{ ref('stg_inventory') }}  -- assuming your bronze model is named 'stg_inventory'
+    select * from {{ref('stg_inventory')}}  -- assuming your bronze model is named 'stg_inventory'
 ),
 
 cleaned as (
