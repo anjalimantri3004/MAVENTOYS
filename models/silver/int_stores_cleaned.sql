@@ -15,7 +15,7 @@ renamed as (
         cast(store_id as varchar) as store_id,
         initcap(trim(store_name)) as store_name,
         upper(trim(store_location)) as location,
-        try_cast(capacity as integer) as capacity,
+        --try_cast(capacity as integer) as capacity,
         current_timestamp() as updated_at
 
     from source
