@@ -10,7 +10,7 @@
  
     select
         table_name,
-        field,
-        description
+        field_name,
+        field_descriptiondescription
     from {{ ref('stg_dictionary') }}
 {% endsnapshot %}
