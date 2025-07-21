@@ -11,7 +11,7 @@
     select  
         store_id,
         product_id,
-        stock_in_hand
+        stock_on_hand
     from {{ ref('stg_inventory') }}
 {% endsnapshot %}
  
