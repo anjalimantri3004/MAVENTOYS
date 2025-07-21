@@ -2,9 +2,9 @@
     {{
         config(
             target_schema='snapshots',
-            unique_key='table_name || \'-\' || field',
+            unique_key='table_name || \'-\' || field_name',
             strategy='check',
-            check_cols=['description']
+            check_cols=['field_description']
         )
     }}
  

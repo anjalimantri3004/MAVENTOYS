@@ -1,4 +1,4 @@
-% snapshot snapshot_products %}
+{% snapshot snapshot_products %}
     {{
         config(
             target_schema='snapshots',
