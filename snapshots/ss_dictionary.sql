@@ -11,6 +11,6 @@
     select
         table_name,
         field_name,
-        field_descriptiondescription
+        field_description
     from {{ ref('stg_dictionary') }}
 {% endsnapshot %}
